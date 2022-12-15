@@ -27,7 +27,7 @@ router
 
 // User :id friends :id routes
 router
-    .route('/:id/friends/:friendId')
+    .route("/:id/friends/:friendId")
     .put(addFriend)
     .delete(deleteFriend)
 
