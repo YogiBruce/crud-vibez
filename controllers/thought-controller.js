@@ -1,14 +1,20 @@
+const { Thought, User } = require('../models');
 
-//getAllThoughts
+const thoughtController = {
+    //getAllThoughts
 
-//getThoughtById
+    //getThoughtById
 
-//createThought
+    //createThought
 
-//updateThought
+    //updateThought
 
-//addReaction
+    //addReaction
 
-//deleteThought
+    //deleteThought
 
-//deleteReaction
+    //deleteReaction
+
+};
+
+module.exports = thoughtController;

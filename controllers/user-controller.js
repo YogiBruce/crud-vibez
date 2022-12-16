@@ -1,13 +1,20 @@
-//getAllUsers
+const { User } = require("../models");
 
-//getUserById
+const userController = {
+  
+    //getAllUsers
+  
+    //getUserById
+  
+    //createUser
+ 
+    //updateUser
+ 
+    //deleteUser
+  
+    //addFriend
+  
+    //deleteFriend
+};
 
-//createUser
-
-//updateUser
-
-//addFriend
-
-//deleteUser
-
-//deleteFriend
+module.exports = userController;
