@@ -69,7 +69,7 @@ const userController = {
           : Thought.deleteMany({ _id: { $in: user.thoughts } })
       )
       .then(() => res.json({ message: "User and thoughts deleted!" }))
-      .catch((err = res.status(500).json(err)));
+      .catch((err) => res.status(500).json(err));
   },
 
   //addFriend
@@ -89,7 +89,7 @@ const userController = {
           ? res.status(404).json({ message: "No user found with this ID!" })
           : res.json(dbUserData)
       )
-      .catch((err = res.status(500).json(err)));
+      .catch((err) => res.status(500).json(err));
   },
 
   //deleteFriend
@@ -109,7 +109,7 @@ const userController = {
           ? res.status(404).json({ message: "No user found with this ID!" })
           : res.json(dbUserData)
       )
-      .catch((err = res.status(500).json(err)));
+      .catch((err) => res.status(500).json(err));
   },
 };
 
