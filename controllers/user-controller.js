@@ -93,6 +93,24 @@ const userController = {
   },
 
   //deleteFriend
+  deleteFriend({ params }, res) {
+    User.findOneAndUpdate(
+      { _id: params.id },
+      { $pull: { friends: params.friendId } },
+      { new: true }
+    )
+      .populate({
+        path: "friends",
+        select: "__v",
+      })
+      .select("__v")
+      .then((dbUserData) =>
+        !dbUserData
+          ? res.status(404).json({ message: "No user found with this ID!" })
+          : res.json(dbUserData)
+      )
+      .catch((err = res.status(500).json(err)));
+  },
 };
 
 module.exports = userController;
