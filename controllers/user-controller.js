@@ -26,11 +26,9 @@ const userController = {
       })
       .select("__v")
       .then((dbUserData) => {
-        if (!dbUserData) {
-          res.status(404).json({ message: "No user found with this id!" });
-          return;
-        }
-        res.json(dbUserData);
+        !dbUserData
+          ? res.status(404).json({ message: "No user found with this id!" })
+          : res.json(dbUserData);
       })
       .catch((err) => {
         console.log(err);
@@ -39,13 +37,26 @@ const userController = {
   },
 
   //createUser
- createUser({ body }, res){
+  createUser({ body }, res) {
     User.create(body)
-        .then(dbUserData => res.json(dbUserData))
-        .catch(err => res.status(400).json(err))
- }
-  //updateUser
+      .then((dbUserData) => res.json(dbUserData))
+      .catch((err) => res.status(400).json(err));
+  },
 
+  //updateUser
+  updateUser({ params, body }, res) {
+    User.findOneAndUpdate({ _id: req.params.id }, body, {
+      new: true,
+      runValidators: true,
+    })
+      .then((dbUserData) => {
+        !dbUserData
+          ? res.status(404).json({ message: "No user found with that ID!" })
+          : res.json(dbUserData);
+      })
+      .catch((err) => res.status(500).json(err));
+  },
+  
   //deleteUser
 
   //addFriend
