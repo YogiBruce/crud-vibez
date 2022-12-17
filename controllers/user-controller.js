@@ -25,11 +25,11 @@ const userController = {
         select: "__v",
       })
       .select("__v")
-      .then((dbUserData) => {
+      .then((dbUserData) =>
         !dbUserData
           ? res.status(404).json({ message: "No user found with this id!" })
-          : res.json(dbUserData);
-      })
+          : res.json(dbUserData)
+      )
       .catch((err) => {
         console.log(err);
         res.status(400).json(err);
@@ -49,17 +49,31 @@ const userController = {
       new: true,
       runValidators: true,
     })
-      .then((dbUserData) => {
+      .then((dbUserData) =>
         !dbUserData
           ? res.status(404).json({ message: "No user found with that ID!" })
-          : res.json(dbUserData);
-      })
+          : res.json(dbUserData)
+      )
+      .then(() =>
+        res.json({ message: `User ${User.username} has been updated` })
+      )
       .catch((err) => res.status(500).json(err));
   },
-  
+
   //deleteUser
+  deleteUser({ params }, res) {
+    User.findOneAndDelete({ _id: params.id })
+      .then((dbUserData) =>
+        !dbUserData
+          ? res.status(404).json({ message: "No user found this this ID!" })
+          : Thought.deleteMany({ _id: { $in: user.thoughts } })
+      )
+      .then(() => res.json({ message: "User and thoughts deleted!" }))
+      .catch((err = res.status(500).json(err)));
+  },
 
   //addFriend
+  
 
   //deleteFriend
 };
