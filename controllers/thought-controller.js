@@ -47,7 +47,23 @@ const thoughtController = {
   },
 
   //updateThought
-
+  updateThought({ params, body }, res) {
+    Thought.findOneAndUpdate({ _id: params.id }, body, {
+      new: true,
+      runValidators: true,
+    })
+      .populate({
+        path: "reactions",
+        select: "__v",
+      })
+      .select("__v")
+      .then((dbThoughtData) => {
+        !dbThoughtData
+          ? res.status(404).json({ message: "No thoughts found with this Id!" })
+          : res.json(dbThoughtData);
+      })
+      .catch((err) => res.status(500).json(err));
+  },
   //addReaction
 
   //deleteThought
